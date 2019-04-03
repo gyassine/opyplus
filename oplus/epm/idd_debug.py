@@ -24,7 +24,15 @@ def correct_idd(idd):
     fd = idd.table_descriptors["output_variable"].get_field_descriptor(1)
     fd.append_tag("retaincase")
 
-    if CONF.eplus_version >= (9, 0, 1):
+    # Schedule:File
+    fd = idd.table_descriptors["schedule_file"].get_field_descriptor(5)
+    fd.append_tag("type", "integer")
+
+    fd = idd.table_descriptors["meter_custom"].get_field_descriptor(3)
+    fd.append_tag("retaincase")
+
+
+    if CONF.eplus_version == (9, 0, 1):
         # Fan:SystemModel add reference
         fd = idd.table_descriptors["fan_systemmodel"].get_field_descriptor(0)
         fd.append_tag("reference", "FansCVandVAV")
